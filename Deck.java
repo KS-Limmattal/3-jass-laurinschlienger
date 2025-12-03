@@ -26,5 +26,10 @@ import java.util.Arrays;
  *
  */
 public class Deck {
-    
+    Card[] cards;
+
+//Konstruktor
+
+
+
 }
