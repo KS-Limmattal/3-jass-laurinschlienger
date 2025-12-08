@@ -7,5 +7,36 @@
  * andere Karte hat.
  */
 public class Card {
-    
+    Rank wert;
+    Suit farbe;
+
+    // Konstruktor
+    public Card(Rank wert, Suit farbe) {
+        this.wert = wert;
+        this.farbe = farbe;
+    }
+
+    // Equals
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Card other = (Card) obj;
+        if (wert != other.wert)
+            return false;
+        if (farbe != other.farbe)
+            return false;
+        return true;
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return "Card [Wert=" + wert + ", Farbe=" + farbe + "]";
+    }
+
 }

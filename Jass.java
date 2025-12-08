@@ -6,5 +6,16 @@
  * Danach sollen alle Karten auf der Konsole ausgegeben werden.
  */
 public class Jass {
-    
-}
+    //Testcode
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        deck.shuffle();
+        for(int i= 0 ; i > 31; i++){
+            deck.pop();
+        }
+        Card eichelass = new Card(Rank.ASS, Suit.EICHELN);
+        deck.addCard(eichelass);
+        
+    }
+    }
+
