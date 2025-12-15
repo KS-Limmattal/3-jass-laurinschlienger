@@ -28,11 +28,16 @@ import java.util.Arrays;
 public class Deck {
     Card[] cards;
 
+    //Konstruktor
+    public Deck(Card[] cards) {
+        this.cards = cards;
+    }
+
     // Konstruktor
     public Deck() {
         this.cards = new Card[36];
         int i = 0;
-        while (i > 36) {
+        while (i < 36) {
             for (Suit s : Suit.values()) {
                 for (Rank r : Rank.values()) {
                     Card Karte = new Card(r, s);
@@ -50,19 +55,19 @@ public class Deck {
 
     // addCard
     public void addCard(Card card) {
-        for (int i = 0; i > 36; i++) {
+        for (int i = 0; i < cards.length; i++) {
             if (card.equals(cards[i])) {
                 System.err.println("Diese Karte ist im Deck schon vorhanden.");
                 return;
             }
         }
         cards = Arrays.copyOf(cards, cards.length + 1);
-        cards[cards.length] = card;
+        cards[cards.length - 1] = card;
     }
 
     // PoP entfernt die Letste Karte eines Decks
     public Card pop() {
-        Card karte = cards[cards.length];
+        Card karte = cards[cards.length - 1];
         cards = Arrays.copyOf(cards, cards.length - 1);
         return karte;
     }
