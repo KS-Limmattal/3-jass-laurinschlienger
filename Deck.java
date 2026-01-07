@@ -26,5 +26,89 @@ import java.util.Arrays;
  *
  */
 public class Deck {
+    Card[] cards;
+    public Suit trumpfSuit;
+
+    // Konstruktor
+    public Deck(Card[] cards) {
+        this.cards = cards;
+    }
+
+    // Konstruktor
+    public Deck() {
+        this.cards = new Card[36];
+        int i = 0;
+        while (i < 36) {
+            for (Suit s : Suit.values()) {
+                for (Rank r : Rank.values()) {
+                    Card Karte = new Card(r, s);
+                    cards[i] = Karte;
+                    i++;
+                }
+            }
+        }
+    }
+
+    // Getter
+    public Card[] getCards() {
+        return cards;
+    }
+
+    // addCard
+    public void addCard(Card card) {
+        for (int i = 0; i < cards.length; i++) {
+            if (card.equals(cards[i])) {
+                System.err.println("Diese Karte ist im Deck schon vorhanden.");
+                return;
+            }
+        }
+        cards = Arrays.copyOf(cards, cards.length + 1);
+        cards[cards.length - 1] = card;
+    }
+
+    // PoP entfernt die Letste Karte eines Decks
+    public Card pop() {
+        Card karte = cards[cards.length - 1];
+        cards = Arrays.copyOf(cards, cards.length - 1);
+        return karte;
+    }
+
+    // Shuffle
+    public void shuffle() {
+        int i = 0;
+        while (i < 300) {
+            Random rand = new Random();
+            int randomint = rand.nextInt(this.cards.length);
+            Card card1 = cards[randomint];
+            Card card2 = cards[0];
+            cards[0] = card1;
+            cards[randomint] = card2;
+            i++;
+        }
+    }
+
+    // validCards
+    public Deck validCards(Deck Played){
+        Deck playable = new Deck(new Card[0]);
+        if(Played.cards.length == 0){
+            for (int i = 0 ; i < this.cards.length; i++){
+            playable.addCard(this.cards[i]);}
+        return playable;
+            }
+        for (int i = 0; i < this.cards.length; i++){
+        if(this.cards[i].farbe == Played.cards[0].farbe ){
+            playable.addCard(this.cards[i]);
+           }
+        }
+        if (this.trumpfSuit != Played.cards[0].farbe){
+            for (int i = 0; i < this.cards.length; i++){
+        if(this.cards[i].farbe == this.trumpfSuit){
+            playable.addCard(this.cards[i]);
+           }
+        }
+        return playable;
+    }
+    return playable;
+    }
     
 }
