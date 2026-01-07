@@ -10,8 +10,11 @@ public class Jass {
     static Deck player2 = new Deck(new Card[0]);
     static Deck player3 = new Deck(new Card[0]);
     static Deck player4 = new Deck(new Card[0]);
+    static Deck[] players = {player1, player2, player3, player4};
+    static Deck Played= new Deck(new Card[0]);
     int punkte13 = 0;
     int punkte24 = 0;
+// Karten verteilen
 public static void distributCards(){
 Deck deck = new Deck();
 deck.shuffle();
@@ -28,6 +31,31 @@ for(int i = 0 ; i < 9; i++){
     player4.addCard(deck.pop());
 }
 }
+//Karte ausspielen
+public static Card playcard(int p){
+Deck playable = players[p].validCards(Played);
+int palceofcard = 0;
+if (playable.cards.length == 0){
+    return players[p].pop();
+}
+if (playable.cards.length == players[p].cards.length){
+    return players[p].pop();
+}
+for (int i = 0 ; i < players[p].cards.length; i++){
+    if (playable.cards[0] == players[p].cards[i]){
+        palceofcard = i;
+    }
+}
+Card x;
+Card y;
+x = players[p].cards[players[p].cards.length-1];
+y = players[p].cards[palceofcard];
+players[p].cards[players[p].cards.length-1] = y;
+players[p].cards[palceofcard]= x;
+return players[p].pop();
+}
+
+
     //Testcode
     public static void main(String[] args) {
         // Deck deck = new Deck();
@@ -39,6 +67,6 @@ for(int i = 0 ; i < 9; i++){
         // deck.addCard(eichelass);
         // for (int i = 0; i < deck.cards.length;i++){
         // System.out.println(deck.cards[i].toString());}
+    
     }
-    }
-
+}

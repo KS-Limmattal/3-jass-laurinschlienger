@@ -27,8 +27,9 @@ import java.util.Arrays;
  */
 public class Deck {
     Card[] cards;
+    public Suit trumpfSuit;
 
-    //Konstruktor
+    // Konstruktor
     public Deck(Card[] cards) {
         this.cards = cards;
     }
@@ -77,7 +78,7 @@ public class Deck {
         int i = 0;
         while (i < 300) {
             Random rand = new Random();
-            int randomint = rand.nextInt(35);
+            int randomint = rand.nextInt(this.cards.length);
             Card card1 = cards[randomint];
             Card card2 = cards[0];
             cards[0] = card1;
@@ -85,4 +86,29 @@ public class Deck {
             i++;
         }
     }
+
+    // validCards
+    public Deck validCards(Deck Played){
+        Deck playable = new Deck(new Card[0]);
+        if(Played.cards.length == 0){
+            for (int i = 0 ; i < this.cards.length; i++){
+            playable.addCard(this.cards[i]);}
+        return playable;
+            }
+        for (int i = 0; i < this.cards.length; i++){
+        if(this.cards[i].farbe == Played.cards[0].farbe ){
+            playable.addCard(this.cards[i]);
+           }
+        }
+        if (this.trumpfSuit != Played.cards[0].farbe){
+            for (int i = 0; i < this.cards.length; i++){
+        if(this.cards[i].farbe == this.trumpfSuit){
+            playable.addCard(this.cards[i]);
+           }
+        }
+        return playable;
+    }
+    return playable;
+    }
+    
 }
